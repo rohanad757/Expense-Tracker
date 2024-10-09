@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <form id="expenseform">
+            <h1>Expense Tracker</h1>
+            <input id="description" type="text" placeholder="Expense Description" required />
+            <br>
+            <select id="categorie" name="" required>
+                <option value="">Default</option>
+                <option value="Transportation">Transportation</option>
+                <option value="Bike">Bike</option>
+                <option value="McD">McD</option>
+                <option value="Other">Other</option>
+            </select>
+            <br>
+            <input id="amount" placeholder="Amount" type="number" required>
+            <br>
+            <input type="submit" value="Add-Expense">
+        </form>
+        <h3>Expense Summery</h3>
+        <table id="expensetable">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Categorie</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody id="expenselist"></tbody>
+        </table>
+    </div>
+</body>
+<script>
+    const expenseform = document.getElementById("expenseform");
+    const expenselist = document.getElementById("expenselist");
+    expenseform.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const description = document.getElementById("description").value;
+        const categorie = document.getElementById("categorie").value;
+        const amount = document.getElementById("amount").value;
+        if (description && categorie && !isNaN(amount) && amount !== "") {
+            const newRow = document.createElement("tr");
+            newRow.innerHTML = `<td>${description}</td><td>${categorie}</td><td>${amount}</td>`;
+            expenselist.appendChild(newRow);
+
+            document.getElementById('description').value = '';
+            document.getElementById('categorie').value = '';
+            document.getElementById('amount').value = '';
+        }
+    });
+</script>
+
+</html>
